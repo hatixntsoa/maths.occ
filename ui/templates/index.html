@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Maths OCC</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23cc785c'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-size='20' font-family='monospace' font-weight='600' fill='white'>∑</text></svg>"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font-sans: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+  --r: 10px;
+  --r-sm: 6px;
+  --transition: 0.18s ease;
+}
+
+[data-theme="dark"] {
+  --bg:         #1a1a1a;
+  --surface:    #242424;
+  --surface2:   #2c2c2c;
+  --surface3:   #333333;
+  --border:     #3a3a3a;
+  --border2:    #444444;
+  --text:       #ececec;
+  --text2:      #b4b4b4;
+  --muted:      #6e6e6e;
+  --accent:     #cc785c;
+  --accent-bg:  rgba(204,120,92,0.12);
+  --accent2:    #e8a87c;
+  --success:    #4ade80;
+  --success-bg: rgba(74,222,128,0.1);
+  --warning:    #fbbf24;
+  --danger:     #f87171;
+  --danger-bg:  rgba(248,113,113,0.1);
+  --shadow:     0 2px 12px rgba(0,0,0,0.4);
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.3);
+}
+
+[data-theme="light"] {
+  --bg:         #f8f7f4;
+  --surface:    #ffffff;
+  --surface2:   #f3f2ef;
+  --surface3:   #eae9e5;
+  --border:     #e2e1dd;
+  --border2:    #d4d3cf;
+  --text:       #1a1a1a;
+  --text2:      #4a4a4a;
+  --muted:      #8c8c8c;
+  --accent:     #cc785c;
+  --accent-bg:  rgba(204,120,92,0.08);
+  --accent2:    #b5603e;
+  --success:    #16a34a;
+  --success-bg: rgba(22,163,74,0.08);
+  --warning:    #d97706;
+  --danger:     #dc2626;
+  --danger-bg:  rgba(220,38,38,0.08);
+  --shadow:     0 2px 12px rgba(0,0,0,0.08);
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.06);
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 1.5vw, 15px);
+  line-height: 1.6;
+  transition: background var(--transition), color var(--transition);
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: min(960px, 96vw);
+  margin: 0 auto;
+}
+
+/* HEADER */
+header {
+  padding: clamp(12px, 2vh, 20px) clamp(16px, 3vw, 28px) 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.app-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0; color: #fff;
+  font-family: var(--font-mono); font-weight: 600;
+}
+
+.app-title {
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  font-weight: 600; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.app-title span { color: var(--muted); font-weight: 400; }
+
+.header-right {
+  display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+}
+
+.lang-switch {
+  display: flex;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+
+.lang-btn {
+  background: none; border: none;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em;
+  padding: 5px 10px; cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+.lang-btn.active { background: var(--accent); color: #fff; }
+.lang-btn:not(.active):hover { background: var(--surface3); color: var(--text); }
+
+.theme-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text2); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 30px; font-size: 15px;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.theme-btn:hover { background: var(--surface3); border-color: var(--border2); color: var(--text); }
+
+/* TABS */
+.tabs {
+  display: flex;
+  padding: clamp(10px, 1.5vh, 16px) clamp(16px, 3vw, 28px) 0;
+  gap: 2px; flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  background: none; border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: clamp(0.72rem, 1.3vw, 0.82rem);
+  font-weight: 500;
+  padding: 8px clamp(10px, 2vw, 16px);
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+  white-space: nowrap;
+  margin-bottom: -1px;
+  border-radius: 4px 4px 0 0;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* PANES */
+.pane {
+  display: none; flex: 1;
+  overflow-y: auto;
+  padding: clamp(14px, 2vh, 24px) clamp(16px, 3vw, 28px) clamp(20px, 3vh, 36px);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+.pane::-webkit-scrollbar { width: 4px; }
+.pane::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+.pane::-webkit-scrollbar-track { background: transparent; }
+.pane.active { display: flex; flex-direction: column; gap: clamp(10px, 1.8vh, 16px); }
+
+/* THEORY */
+.theory {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  padding: clamp(10px, 1.5vh, 14px) clamp(12px, 2vw, 18px);
+  border-radius: var(--r);
+  color: var(--text2);
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+  white-space: pre-wrap; line-height: 1.75;
+  box-shadow: var(--shadow-sm);
+}
+
+/* FIELDS */
+.field { display: flex; flex-direction: column; gap: 5px; }
+
+.field-label {
+  font-size: clamp(0.67rem, 1.1vw, 0.73rem);
+  letter-spacing: .07em; text-transform: uppercase;
+  color: var(--muted); font-weight: 500;
+}
+.field-label em { font-style: normal; color: var(--accent2); }
+
+input[type="text"] {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: clamp(0.78rem, 1.3vw, 0.875rem);
+  padding: clamp(7px, 1vh, 10px) clamp(10px, 1.5vw, 14px);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  width: 100%;
+  box-shadow: var(--shadow-sm);
+}
+input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.row { display: flex; gap: clamp(8px, 1.5vw, 14px); }
+.row .field { flex: 1; }
+
+/* BUTTONS */
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+button.btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text2);
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 1.2vw, 0.8rem);
+  padding: clamp(6px, 1vh, 8px) clamp(12px, 2vw, 18px);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+  white-space: nowrap; font-weight: 500;
+  box-shadow: var(--shadow-sm);
+}
+button.btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+button.btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); font-weight: 600; }
+button.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button.btn.primary:hover { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+button.btn.success { border-color: var(--success); color: var(--success); }
+button.btn.success:hover { background: var(--success-bg); }
+button.btn.danger  { border-color: var(--danger);  color: var(--danger); }
+button.btn.danger:hover  { background: var(--danger-bg); }
+
+/* RESULT BOX */
+.result-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border2);
+  border-radius: var(--r);
+  padding: clamp(10px, 1.8vh, 16px) clamp(12px, 2vw, 18px);
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+  white-space: pre-wrap; line-height: 1.9;
+  min-height: 60px; color: var(--text2);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition);
+}
+.result-box.ok    { border-left-color: var(--success); }
+.result-box.error { border-left-color: var(--danger); color: var(--danger); }
+
+/* TABLE */
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden; flex: 1; min-height: 0; overflow-y: auto;
+  box-shadow: var(--shadow-sm);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+.table-wrap::-webkit-scrollbar { width: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+table { width: 100%; border-collapse: collapse; font-size: clamp(0.7rem, 1.2vw, 0.8rem); }
+
+th {
+  text-align: left;
+  padding: clamp(7px, 1.2vh, 10px) clamp(10px, 1.8vw, 14px);
+  border-bottom: 1px solid var(--border);
+  color: var(--muted); font-weight: 600;
+  letter-spacing: .07em; text-transform: uppercase;
+  font-size: clamp(0.63rem, 1vw, 0.7rem);
+  font-family: var(--font-sans);
+  background: var(--surface2);
+}
+td {
+  padding: clamp(7px, 1.2vh, 10px) clamp(10px, 1.8vw, 14px);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono); color: var(--text2);
+}
+tr:hover td { background: var(--surface2); cursor: pointer; }
+tr:last-child td { border-bottom: none; }
+.empty td { color: var(--muted); font-style: italic; }
+
+/* MSG BOX */
+.msg-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: clamp(8px, 1.2vh, 11px) clamp(10px, 1.8vw, 14px);
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 1.2vw, 0.8rem);
+  min-height: 36px; color: var(--muted);
+}
+
+.hi     { color: var(--warning); font-weight: 600; }
+.ok-val { color: var(--success); font-weight: 500; }
+.acc    { color: var(--accent2); }
+
+/* TOAST */
+#toast {
+  position: fixed;
+  bottom: clamp(16px, 3vh, 28px);
+  left: 50%;
+  transform: translateX(-50%) translateY(40px);
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  padding: 9px 22px; border-radius: 99px;
+  font-family: var(--font-sans);
+  font-size: clamp(0.72rem, 1.2vw, 0.8rem);
+  font-weight: 500; opacity: 0;
+  transition: transform 0.25s cubic-bezier(.22,.68,0,1.2), opacity 0.2s;
+  pointer-events: none; z-index: 99; white-space: nowrap;
+  box-shadow: var(--shadow);
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+#toast.ok   { border-color: var(--success); color: var(--success); }
+#toast.err  { border-color: var(--danger);  color: var(--danger); }
+
+@media (max-width: 560px) {
+  .row { flex-direction: column; }
+  .app-title span { display: none; }
+}
+</style>
+</head>
+<body>
+<div id="toast"></div>
+<div class="shell">
+
+  <header>
+    <div class="header-left">
+      <div class="app-icon">∑</div>
+      <div class="app-title" id="app-title-el">
+        Algèbre &amp; Ensembles <span>— Web UI</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="lang-switch">
+        <button class="lang-btn active" id="lang-fr" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle theme">
+        <span id="theme-icon">☀️</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="ops"   onclick="switchTab('ops')">⊕ <span class="t" data-key="tab_ops">Opérations</span></button>
+    <button class="tab-btn"        data-tab="comp"  onclick="switchTab('comp')">∈ <span class="t" data-key="tab_comp">Compréhension</span></button>
+    <button class="tab-btn"        data-tab="appli" onclick="switchTab('appli')">f(x) <span class="t" data-key="tab_appli">Applications</span></button>
+    <!-- <button class="tab-btn"        data-tab="sets"  onclick="switchTab('sets')">💾 <span class="t" data-key="tab_sets">Mes Ensembles</span></button> -->
+    <button class="tab-btn"        data-tab="rel"   onclick="switchTab('rel')">⟺ <span class="t" data-key="tab_rel">Relations</span></button>
+    <button class="tab-btn"        data-tab="prime" onclick="switchTab('prime')">𝕡 <span class="t" data-key="tab_prime">Nombres Premiers</span></button>
+    <button class="tab-btn"        data-tab="crypto" onclick="switchTab('crypto')">🔐 <span class="t" data-key="tab_crypto">Cryptographie</span></button>
+    <!-- <button class="tab-btn"        data-tab="hist"  onclick="switchTab('hist')">📜 <span class="t" data-key="tab_hist">Historique</span></button> -->
+  </div>
+
+  <!-- TAB 1 -->
+  <div class="pane active" id="pane-ops">
+    <div class="theory" id="theory-ops"></div>
+    <div class="row">
+      <div class="field">
+        <div class="field-label"><span class="t" data-key="lbl_set">Ensemble</span> <em>A</em> <span class="t" data-key="lbl_hint">(entiers séparés par espaces)</span></div>
+        <input type="text" id="ops-A" data-ph="ph_set_a"/>
+      </div>
+      <div class="field">
+        <div class="field-label"><span class="t" data-key="lbl_set">Ensemble</span> <em>B</em></div>
+        <input type="text" id="ops-B" data-ph="ph_set_b"/>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn op-btn" onclick="doOp('union')">A ∪ B</button>
+      <button class="btn op-btn" onclick="doOp('intersection')">A ∩ B</button>
+      <button class="btn op-btn" onclick="doOp('difference')">A \ B</button>
+      <button class="btn op-btn" onclick="doOp('symdiff')">A △ B</button>
+      <button class="btn op-btn" onclick="doOp('product')">A × B</button>
+      <button class="btn op-btn" onclick="doOp('cardinality')">|A|</button>
+    </div>
+    <div class="result-box" id="ops-result"></div>
+  </div>
+
+  <!-- TAB 2 -->
+  <div class="pane" id="pane-comp">
+    <div class="theory" id="theory-comp"></div>
+    <div class="row">
+      <div class="field">
+        <div class="field-label"><span class="t" data-key="lbl_start">Début de l'univers</span> <em>E</em></div>
+        <input type="text" id="comp-start" data-ph="ph_start"/>
+      </div>
+      <div class="field">
+        <div class="field-label"><span class="t" data-key="lbl_end">Fin de l'univers</span> <em>E</em></div>
+        <input type="text" id="comp-end" data-ph="ph_end"/>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label"><span class="t" data-key="lbl_pred">Prédicat</span> <em>P(x)</em> — <span class="t" data-key="lbl_py">expression Python en 'x'</span></div>
+      <input type="text" id="comp-pred" data-ph="ph_pred"/>
+    </div>
+    <div class="btn-row">
+      <button class="btn primary" onclick="doComp()">▶ <span class="t" data-key="btn_build">Construire A</span></button>
+    </div>
+    <div class="result-box" id="comp-result"></div>
+  </div>
+
+  <!-- TAB 3 -->
+  <div class="pane" id="pane-appli">
+    <div class="theory" id="theory-appli"></div>
+    <div class="row">
+      <div class="field">
+        <div class="field-label">① <span class="t" data-key="lbl_domain">Domaine</span> <em>A</em></div>
+        <input type="text" id="f-A" data-ph="ph_set_a"/>
+      </div>
+      <div class="field">
+        <div class="field-label">② <span class="t" data-key="lbl_codomain">Codomaine</span> <em>B</em></div>
+        <input type="text" id="f-B" data-ph="ph_codomain"/>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label">③ <span class="t" data-key="lbl_formula">Formule</span> <em>f(x)</em> — <span class="t" data-key="lbl_py">expression Python en 'x'</span></div>
+      <input type="text" id="f-formula" data-ph="ph_formula"/>
+    </div>
+    <div class="row">
+      <div class="field">
+        <div class="field-label">④ <em>S ⊆ A</em> <span class="t" data-key="lbl_for_fs">pour f(S)</span> <span style="color:var(--muted)" class="t" data-key="lbl_empty_a">(vide = A entier)</span></div>
+        <input type="text" id="f-S" data-ph="ph_sub_s"/>
+      </div>
+      <div class="field">
+        <div class="field-label">⑤ <em>T ⊆ B</em> <span class="t" data-key="lbl_for_ft">pour f⁻¹(T)</span> <span style="color:var(--muted)" class="t" data-key="lbl_empty_b">(vide = B entier)</span></div>
+        <input type="text" id="f-T" data-ph="ph_sub_t"/>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn primary" onclick="doFunction()">▶ <span class="t" data-key="btn_analyze">Analyser f</span></button>
+    </div>
+    <div class="result-box" id="f-result"></div>
+  </div>
+
+  <!-- TAB 4 -->
+  <div class="pane" id="pane-sets">
+    <div class="theory" id="theory-sets"></div>
+    <div class="row">
+      <div class="field">
+        <div class="field-label"><span class="t" data-key="lbl_name">Nom de l'ensemble</span></div>
+        <input type="text" id="sets-name" data-ph="ph_name"/>
+      </div>
+      <div class="field">
+        <div class="field-label"><span class="t" data-key="lbl_elems">Éléments</span> <span class="t" data-key="lbl_hint">(entiers séparés par espaces)</span></div>
+        <input type="text" id="sets-elements" data-ph="ph_elems"/>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn success" onclick="setsAction('save')">💾 <span class="t" data-key="btn_save">Sauvegarder</span></button>
+      <button class="btn" onclick="setsAction('loadA')">📂 <span class="t" data-key="btn_load_a">Charger → A</span></button>
+      <button class="btn" onclick="setsAction('loadB')">📂 <span class="t" data-key="btn_load_b">Charger → B</span></button>
+      <button class="btn danger" onclick="setsAction('delete')">🗑 <span class="t" data-key="btn_delete">Supprimer</span></button>
+    </div>
+    <div class="msg-box" id="sets-msg">—</div>
+    <div class="field-label" style="margin-top:4px"><span class="t" data-key="lbl_saved">Ensembles sauvegardés</span></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th><span class="t" data-key="th_name">Nom</span></th>
+          <th><span class="t" data-key="th_elems">Éléments</span></th>
+          <th>|A|</th>
+        </tr></thead>
+        <tbody id="sets-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 5 -->
+  <div class="pane" id="pane-hist">
+    <div class="btn-row">
+      <button class="btn danger" onclick="clearHistory()">🗑 <span class="t" data-key="btn_clear">Effacer l'historique</span></button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th><span class="t" data-key="th_time">Heure</span></th>
+          <th><span class="t" data-key="th_op">Opération</span></th>
+          <th>A</th><th>B</th>
+          <th><span class="t" data-key="th_result">Résultat</span></th>
+        </tr></thead>
+        <tbody id="hist-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+<!-- SHELL stays open - closed after pane-crypto below -->
+
+<!-- ═══════════════════════════════════════════════════════════
+     TAB 6 — RELATIONS
+═══════════════════════════════════════════════════════════════ -->
+<div class="pane" id="pane-rel">
+
+  <!-- Sub-tabs inside relations -->
+  <div style="display:flex;gap:6px;flex-wrap:wrap;padding:4px 0 8px;">
+    <button class="btn active" id="rel-sub-order"   onclick="relSubTab('order')">Relation d'ordre</button>
+    <button class="btn"        id="rel-sub-equiv"   onclick="relSubTab('equiv')">Relation d'équivalence</button>
+    <button class="btn"        id="rel-sub-modulo"  onclick="relSubTab('modulo')">Congruence mod n</button>
+  </div>
+
+  <!-- ORDER -->
+  <div id="rel-pane-order">
+    <div class="theory" id="theory-rel_order" style="margin-bottom:10px;"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;" id="order-rel-buttons"></div>
+    <div class="result-box" id="order-rel-result" style="margin-top:10px;"></div>
+  </div>
+
+  <!-- EQUIVALENCE -->
+  <div id="rel-pane-equiv" style="display:none;">
+    <div class="theory" id="theory-rel_equiv" style="margin-bottom:10px;"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;" id="equiv-rel-buttons"></div>
+    <div class="result-box" id="equiv-rel-result" style="margin-top:10px;"></div>
+  </div>
+
+  <!-- MODULO -->
+  <div id="rel-pane-modulo" style="display:none;">
+    <div class="theory" id="theory-rel_modulo" style="margin-bottom:10px;"></div>
+    <div class="row">
+      <div class="field"><div class="field-label">a</div><input type="text" id="mod-a" placeholder="ex: 17"/></div>
+      <div class="field"><div class="field-label">b</div><input type="text" id="mod-b" placeholder="ex: 5"/></div>
+      <div class="field"><div class="field-label">n (modulo)</div><input type="text" id="mod-n" placeholder="ex: 3"/></div>
+    </div>
+    <div class="btn-row" style="margin-top:10px;margin-bottom:10px;"><button class="btn primary" onclick="doModulo()">▶ <span class="t" data-key="btn_verify_modulo">Vérifier a ≡ b (mod n)</span></button></div>
+    <div class="result-box" id="mod-result"></div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TAB 7 — PRIME NUMBERS
+═══════════════════════════════════════════════════════════════ -->
+<div class="pane" id="pane-prime">
+
+  <div style="display:flex;gap:6px;flex-wrap:wrap;padding:4px 0 8px;">
+    <button class="btn active" id="prime-sub-single" onclick="primeSubTab('single')">Vérifier un nombre</button>
+    <button class="btn"        id="prime-sub-range"  onclick="primeSubTab('range')">Premiers dans un intervalle</button>
+  </div>
+
+  <!-- SINGLE CHECK -->
+  <div id="prime-pane-single">
+    <div class="theory" id="theory-prime_single" style="margin-bottom:10px;"></div>
+    <div class="field">
+      <div class="field-label">Entier à tester</div>
+      <input type="text" id="prime-single-n" placeholder="ex: 97"/>
+    </div>
+    <div class="btn-row" style="margin-top:10px;margin-bottom:10px;"><button class="btn primary" onclick="doPrimeCheck()">▶ <span class="t" data-key="btn_test_prime">Tester la primalité</span></button></div>
+    <div class="result-box" id="prime-single-result"></div>
+  </div>
+
+  <!-- RANGE CHECK -->
+  <div id="prime-pane-range" style="display:none;">
+    <div class="theory" id="theory-prime_range" style="margin-bottom:10px;"></div>
+    <div class="row">
+      <div class="field"><div class="field-label">Début a</div><input type="text" id="prime-range-a" placeholder="ex: 2"/></div>
+      <div class="field"><div class="field-label">Fin b</div><input type="text" id="prime-range-b" placeholder="ex: 100"/></div>
+    </div>
+    <div class="btn-row" style="margin-top:10px;margin-bottom:10px;">
+      <button class="btn primary" onclick="doPrimeRange(false)">▶ Trouver les premiers</button>
+      <button class="btn" onclick="doPrimeRange(true)">🔍 Verbose (GCD détaillé)</button>
+    </div>
+    <div class="result-box" id="prime-range-result"></div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TAB 8 — CRYPTOGRAPHY
+═══════════════════════════════════════════════════════════════ -->
+<div class="pane" id="pane-crypto">
+
+  <div style="display:flex;gap:6px;flex-wrap:wrap;padding:4px 0 8px;">
+    <button class="btn active" id="crypto-sub-b64"    onclick="cryptoSubTab('b64')">Base64</button>
+    <button class="btn"        id="crypto-sub-caesar" onclick="cryptoSubTab('caesar')">César / Shift</button>
+    <button class="btn"        id="crypto-sub-rsa"    onclick="cryptoSubTab('rsa')">RSA</button>
+  </div>
+
+  <!-- BASE64 -->
+  <div id="crypto-pane-b64">
+    <div class="theory" id="theory-crypto_b64" style="margin-bottom:10px;"></div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <button class="btn active" id="b64-mode-enc" onclick="setB64Mode('encode')">Encoder</button>
+      <button class="btn"        id="b64-mode-dec" onclick="setB64Mode('decode')">Décoder</button>
+    </div>
+    <div class="field">
+      <div class="field-label" id="b64-label">Texte à encoder</div>
+      <input type="text" id="b64-input" placeholder="ex: Hello World"/>
+    </div>
+    <div class="btn-row" style="margin-top:10px;margin-bottom:10px;"><button class="btn primary" onclick="doBase64()">▶ <span class="t" data-key="btn_execute">Exécuter</span></button></div>
+    <div class="result-box" id="b64-result"></div>
+  </div>
+
+  <!-- CAESAR -->
+  <div id="crypto-pane-caesar" style="display:none;">
+    <div class="theory" id="theory-crypto_caesar" style="margin-bottom:10px;"></div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <button class="btn active" id="caesar-mode-enc" onclick="setCaesarMode('encode')">Encoder</button>
+      <button class="btn"        id="caesar-mode-dec" onclick="setCaesarMode('decode')">Décoder</button>
+      <button class="btn"        id="caesar-mode-brute" onclick="setCaesarMode('brute')">Brute-force</button>
+    </div>
+    <div class="field">
+      <div class="field-label">Message</div>
+      <input type="text" id="caesar-input" placeholder="ex: Hello World"/>
+    </div>
+    <div class="field" id="caesar-shift-field">
+      <div class="field-label">Décalage (1–25)</div>
+      <input type="text" id="caesar-shift" placeholder="ex: 3"/>
+    </div>
+    <div class="btn-row" style="margin-top:10px;margin-bottom:10px;"><button class="btn primary" onclick="doCaesar()">▶ <span class="t" data-key="btn_execute">Exécuter</span></button></div>
+    <div class="result-box" id="caesar-result"></div>
+  </div>
+
+  <!-- RSA -->
+  <div id="crypto-pane-rsa" style="display:none;">
+    <div class="theory" id="theory-crypto_rsa" style="margin-bottom:10px;"></div>
+
+    <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+      <button class="btn active" id="rsa-mode-gen"  onclick="setRsaMode('gen')">Générer des clés</button>
+      <button class="btn"        id="rsa-mode-enc"  onclick="setRsaMode('enc')">Chiffrer</button>
+      <button class="btn"        id="rsa-mode-dec"  onclick="setRsaMode('dec')">Déchiffrer</button>
+    </div>
+
+    <!-- GENERATE KEYS -->
+    <div id="rsa-pane-gen">
+      <div class="field">
+        <div class="field-label">Taille des premiers (bits)</div>
+        <input type="text" id="rsa-bits" placeholder="ex: 64 (16-256)"/>
+      </div>
+      <div class="btn-row" style="margin-top:10px;margin-bottom:10px;"><button class="btn primary" onclick="doRsaGenerate()">▶ Générer les clés RSA</button></div>
+      <div class="result-box" id="rsa-gen-result"></div>
+    </div>
+
+    <!-- ENCRYPT -->
+    <div id="rsa-pane-enc" style="display:none;">
+      <div class="field">
+        <div class="field-label">Message à chiffrer</div>
+        <input type="text" id="rsa-enc-msg" placeholder="ex: Bonjour"/>
+      </div>
+      <div class="row">
+        <div class="field"><div class="field-label">p (premier)</div><input type="text" id="rsa-enc-p" placeholder="laisser vide si n fourni"/></div>
+        <div class="field"><div class="field-label">q (premier)</div><input type="text" id="rsa-enc-q" placeholder="laisser vide si n fourni"/></div>
+      </div>
+      <div class="row" style="margin-top:10px;margin-bottom:10px;">
+        <div class="field"><div class="field-label">e (exposant public)</div><input type="text" id="rsa-enc-e" placeholder="ex: 65537"/></div>
+        <div class="field"><div class="field-label">n (si p,q inconnus)</div><input type="text" id="rsa-enc-n" placeholder="optionnel si p,q fournis"/></div>
+      </div>
+      <div class="btn-row" style="margin-top:10px;margin-bottom:10px;"><button class="btn primary" onclick="doRsaEncrypt()">▶ Chiffrer</button></div>
+      <div class="result-box" id="rsa-enc-result"></div>
+    </div>
+
+    <!-- DECRYPT -->
+    <div id="rsa-pane-dec" style="display:none;">
+      <div class="field">
+        <div class="field-label">Chiffré c (entier décimal)</div>
+        <input type="text" id="rsa-dec-c" placeholder="ex: 123456789"/>
+      </div>
+      <div class="row" style="margin-top:10px;margin-bottom:10px;">
+        <div class="field"><div class="field-label">d (clé privée)</div><input type="text" id="rsa-dec-d" placeholder="ex: ..."/></div>
+        <div class="field"><div class="field-label">n</div><input type="text" id="rsa-dec-n" placeholder="ex: ..."/></div>
+      </div>
+      <div class="btn-row" style="margin-top:10px;margin-bottom:10px;"><button class="btn primary" onclick="doRsaDecrypt()">▶ Déchiffrer</button></div>
+      <div class="result-box" id="rsa-dec-result"></div>
+    </div>
+
+  </div><!-- /crypto-pane-rsa -->
+
+</div><!-- /pane-crypto -->
+
+</div><!-- /shell -->
+
+
+<script>
+// ─── TRANSLATIONS ────────────────────────────────────────────
+const TR = {
+  fr: {
+    app_title: 'Maths Info', app_sub: '',
+    tab_ops:'Ensembles', tab_comp:'Compréhension', tab_appli:'Applications',
+    tab_sets:'Mes Ensembles', tab_hist:'Historique',
+    lbl_set:'Ensemble', lbl_hint:'(entiers séparés par espaces)',
+    lbl_start:"Début de l'univers", lbl_end:"Fin de l'univers",
+    lbl_pred:'Prédicat', lbl_py:"expression Python en 'x'",
+    lbl_domain:'Domaine', lbl_codomain:'Codomaine',
+    lbl_formula:'Formule',
+    lbl_for_fs:'pour f(S)', lbl_for_ft:'pour f⁻¹(T)',
+    lbl_empty_a:'(vide = A entier)', lbl_empty_b:'(vide = B entier)',
+    lbl_name:"Nom de l'ensemble", lbl_elems:'Éléments',
+    lbl_saved:'Ensembles sauvegardés',
+    btn_build:'Construire A', btn_analyze:'Analyser f',
+    btn_save:'Sauvegarder', btn_load_a:'Charger → A',
+    btn_load_b:'Charger → B', btn_delete:'Supprimer',
+    btn_clear:"Effacer l'historique",
+    th_name:'Nom', th_elems:'Éléments', th_time:'Heure',
+    th_op:'Opération', th_result:'Résultat',
+    ph_set_a:'ex: 1 2 3 4 5', ph_set_b:'ex: 3 4 5 6 7',
+    ph_start:'ex: -10', ph_end:'ex: 10',
+    ph_pred:'ex: x % 2 == 0',
+    ph_codomain:'ex: 1 4 9 16 25',
+    ph_formula:'ex: x ** 2   ou   2*x+1',
+    ph_sub_s:'ex: 1 2 3', ph_sub_t:'ex: 4 9',
+    ph_name:'ex: Pairs  ou  MonEnsemble',
+    ph_elems:'ex: 2 4 6 8 10',
+    result_ph:'Le résultat apparaîtra ici…',
+    empty_sets:'Aucun ensemble sauvegardé',
+    empty_hist:'Aucun historique',
+    toast_ok:'✅ Opération réussie', toast_built:'✅ Ensemble construit',
+    toast_done:'✅ Analyse terminée',
+    toast_saved:'sauvegardé 💾', toast_del:'supprimé',
+    toast_cleared:'Historique effacé 🗑', toast_err:'Erreur',
+    theory_ops:`Rappel  —  Opérations de base
+  A ∪ B  : union         → éléments dans A OU dans B
+  A ∩ B  : intersection  → éléments dans A ET dans B
+  A \\ B  : différence    → éléments dans A mais PAS dans B
+  A △ B  : diff. sym.    → (A\\B) ∪ (B\\A)
+  A × B  : produit cart. → toutes les paires (a, b)
+  |A|    : cardinalité   → nombre d'éléments de A`,
+    theory_comp:`Rappel  —  Ensemble par compréhension
+  A = { x ∈ E  |  P(x) }
+  E    : univers (intervalle d'entiers)
+  P(x) : prédicat, expression vraie ou fausse
+
+  Exemples de prédicats :
+    x % 2 == 0          →  entiers pairs
+    x > 3 and x < 10   →  ]3 ; 10[
+    x ** 2 < 50         →  x² < 50`,
+    theory_appli:`Rappel  —  Applications  f : A → B
+  Injective  : f(x₁) = f(x₂)  ⟹  x₁ = x₂   (pas de collision)
+  Surjective : ∀ y ∈ B, ∃ x ∈ A tel que f(x) = y  (tout B atteint)
+  Bijective  : injective ET surjective
+
+  Image directe  f(S) = { f(x) | x ∈ S }
+  Image inverse  f⁻¹(T) = { x ∈ A | f(x) ∈ T }`,
+    theory_sets:`Sauvegarde nommée  —  donne un nom à tes ensembles
+Tu pourras les recharger dans les autres onglets
+en cliquant sur "Charger → A" ou "Charger → B".`,
+    tab_rel:'Relations', tab_prime:'Nombres Premiers', tab_crypto:'Cryptographie',
+    theory_rel_order: `Relations d'ordre — Une relation ℛ sur E est un ordre si elle est :\n  • Réflexive    : ∀ a, a ℛ a\n  • Antisymétrique : ∀ a,b, (a ℛ b ∧ b ℛ a) ⟹ a = b\n  • Transitive   : ∀ a,b,c, (a ℛ b ∧ b ℛ c) ⟹ a ℛ c\nSi de plus ∀ a,b, a ℛ b ou b ℛ a  →  ordre TOTAL, sinon PARTIEL.`,
+    theory_rel_equiv: `Relations d'équivalence — Une relation ℛ sur E est une équivalence si elle est :\n  • Réflexive  : ∀ a, a ℛ a\n  • Symétrique : ∀ a,b, a ℛ b ⟹ b ℛ a\n  • Transitive : ∀ a,b,c, (a ℛ b ∧ b ℛ c) ⟹ a ℛ c\nLes classes d'équivalence partitionnent E.`,
+    theory_rel_modulo: `Congruence modulo n : a ≡ b (mod n)  ⟺  n | (a − b)\nC'est une relation d'équivalence sur ℤ. Les classes forment ℤ/nℤ.`,
+    theory_prime_single: `Test de primalité — méthode : division d'essai jusqu'à √n.\nn est premier  ⟺  aucun entier k ∈ [2, √n] ne divise n.\nÉquivalent GCD : n est premier ⟺ gcd(n, k) = 1 pour tout k ∈ [2, √n].`,
+    theory_prime_range: `Méthode GCD sur un intervalle : pour chaque n ∈ [a, b],\non vérifie gcd(n, k) = 1 pour tout k ∈ [2, √n].\nLimite : intervalle ≤ 10 000 valeurs.`,
+    theory_crypto_b64: `Base64 — encode les octets binaires en caractères ASCII imprimables.\nPrincipe : grouper les bits par 6, chaque groupe → 1 char dans l'alphabet A-Z a-z 0-9 +/\nPadding '=' ajouté si la longueur n'est pas multiple de 3 octets.`,
+    theory_crypto_caesar: `Chiffre de César — substitution monoalphabétique par décalage.\nEncodage : C = (P + shift) mod 26   (P = position lettre, 0-25)\nDécodage : P = (C − shift) mod 26\nAttaque brute-force : tester les 25 décalages possibles.`,
+    theory_crypto_rsa: `RSA — cryptographie asymétrique à clé publique/privée.\n① Choisir deux premiers p, q  ②  n = p×q  ③  φ(n) = (p-1)(q-1)\n④ e tel que gcd(e, φ(n)) = 1  ⑤  d = e⁻¹ mod φ(n)\nChiffrer : c = m^e mod n   |   Déchiffrer : m = c^d mod n\n⚠️ Implémentation pédagogique — ne pas utiliser en production.`,
+    lbl_rel_order_heading: "── Conditions d'ordre ──",
+    lbl_rel_equiv_heading: "── Conditions d'équivalence ──",
+    lbl_rel_total: "Ordre total ?",
+    lbl_rel_classes: "Classes d'équivalence :",
+    lbl_rel_examples: "Exemples :",
+    proof_label: "Preuve",
+    total_yes: "✓ Oui",
+    total_no: "✗ Non",
+    btn_verify_modulo: "Vérifier a ≡ b (mod n)",
+    btn_test_prime: "Tester la primalité",
+    btn_execute: "Exécuter",
+  },
+  en: {
+    app_title: 'CS Maths', app_sub: '',
+    tab_ops:'Sets', tab_comp:'Comprehension', tab_appli:'Functions',
+    tab_sets:'My Sets', tab_hist:'History',
+    lbl_set:'Set', lbl_hint:'(integers separated by spaces)',
+    lbl_start:'Universe start', lbl_end:'Universe end',
+    lbl_pred:'Predicate', lbl_py:"Python expression in 'x'",
+    lbl_domain:'Domain', lbl_codomain:'Codomain',
+    lbl_formula:'Formula',
+    lbl_for_fs:'for f(S)', lbl_for_ft:'for f⁻¹(T)',
+    lbl_empty_a:'(empty = full A)', lbl_empty_b:'(empty = full B)',
+    lbl_name:'Set name', lbl_elems:'Elements',
+    lbl_saved:'Saved sets',
+    btn_build:'Build A', btn_analyze:'Analyze f',
+    btn_save:'Save', btn_load_a:'Load → A',
+    btn_load_b:'Load → B', btn_delete:'Delete',
+    btn_clear:'Clear history',
+    th_name:'Name', th_elems:'Elements', th_time:'Time',
+    th_op:'Operation', th_result:'Result',
+    ph_set_a:'e.g. 1 2 3 4 5', ph_set_b:'e.g. 3 4 5 6 7',
+    ph_start:'e.g. -10', ph_end:'e.g. 10',
+    ph_pred:'e.g. x % 2 == 0',
+    ph_codomain:'e.g. 1 4 9 16 25',
+    ph_formula:'e.g. x ** 2   or   2*x+1',
+    ph_sub_s:'e.g. 1 2 3', ph_sub_t:'e.g. 4 9',
+    ph_name:'e.g. Evens  or  MySet',
+    ph_elems:'e.g. 2 4 6 8 10',
+    result_ph:'Result will appear here…',
+    empty_sets:'No saved sets',
+    empty_hist:'No history',
+    toast_ok:'✅ Operation successful', toast_built:'✅ Set built',
+    toast_done:'✅ Analysis complete',
+    toast_saved:'saved 💾', toast_del:'deleted',
+    toast_cleared:'History cleared 🗑', toast_err:'Error',
+    theory_ops:`Reference  —  Basic set operations
+  A ∪ B  : union         → elements in A OR B
+  A ∩ B  : intersection  → elements in A AND B
+  A \\ B  : difference    → elements in A but NOT in B
+  A △ B  : sym. diff.    → (A\\B) ∪ (B\\A)
+  A × B  : cart. product → all pairs (a, b)
+  |A|    : cardinality   → number of elements in A`,
+    theory_comp:`Reference  —  Set-builder notation
+  A = { x ∈ E  |  P(x) }
+  E    : universe (integer range)
+  P(x) : predicate, true or false expression
+
+  Predicate examples:
+    x % 2 == 0          →  even integers
+    x > 3 and x < 10   →  ]3 ; 10[
+    x ** 2 < 50         →  x² < 50`,
+    theory_appli:`Reference  —  Functions  f : A → B
+  Injective  : f(x₁) = f(x₂)  ⟹  x₁ = x₂   (no collision)
+  Surjective : ∀ y ∈ B, ∃ x ∈ A such that f(x) = y  (all B reached)
+  Bijective  : injective AND surjective
+
+  Direct image  f(S) = { f(x) | x ∈ S }
+  Inverse image f⁻¹(T) = { x ∈ A | f(x) ∈ T }`,
+    theory_sets:`Named save  —  give a name to your sets
+You can reload them in other tabs
+by clicking "Load → A" or "Load → B".`,
+    tab_rel:'Relations', tab_prime:'Prime Numbers', tab_crypto:'Cryptography',
+    theory_rel_order: `Order relations — A relation ℛ on E is an order if it is:\n  • Reflexive      : ∀ a, a ℛ a\n  • Antisymmetric  : ∀ a,b, (a ℛ b ∧ b ℛ a) ⟹ a = b\n  • Transitive     : ∀ a,b,c, (a ℛ b ∧ b ℛ c) ⟹ a ℛ c\nIf also ∀ a,b, a ℛ b or b ℛ a  →  TOTAL order, otherwise PARTIAL.`,
+    theory_rel_equiv: `Equivalence relations — A relation ℛ on E is an equivalence if it is:\n  • Reflexive   : ∀ a, a ℛ a\n  • Symmetric   : ∀ a,b, a ℛ b ⟹ b ℛ a\n  • Transitive  : ∀ a,b,c, (a ℛ b ∧ b ℛ c) ⟹ a ℛ c\nEquivalence classes partition E.`,
+    theory_rel_modulo: `Congruence modulo n : a ≡ b (mod n)  ⟺  n | (a − b)\nThis is an equivalence relation on ℤ. The classes form ℤ/nℤ.`,
+    theory_prime_single: `Primality test — method: trial division up to √n.\nn is prime  ⟺  no integer k ∈ [2, √n] divides n.\nGCD equivalent: n is prime ⟺ gcd(n, k) = 1 for all k ∈ [2, √n].`,
+    theory_prime_range: `GCD method on an interval: for each n ∈ [a, b],\nwe check gcd(n, k) = 1 for all k ∈ [2, √n].\nLimit: interval ≤ 10,000 values.`,
+    theory_crypto_b64: `Base64 — encodes binary bytes into printable ASCII characters.\nPrinciple: group bits by 6, each group → 1 char in alphabet A-Z a-z 0-9 +/\nPadding '=' added if length is not a multiple of 3 bytes.`,
+    theory_crypto_caesar: `Caesar cipher — monoalphabetic substitution by shift.\nEncoding: C = (P + shift) mod 26   (P = letter position, 0-25)\nDecoding: P = (C − shift) mod 26\nBrute-force attack: test all 25 possible shifts.`,
+    theory_crypto_rsa: `RSA — asymmetric public/private key cryptography.\n① Choose two primes p, q  ②  n = p×q  ③  φ(n) = (p-1)(q-1)\n④ e such that gcd(e, φ(n)) = 1  ⑤  d = e⁻¹ mod φ(n)\nEncrypt: c = m^e mod n   |   Decrypt: m = c^d mod n\n⚠️ Educational implementation — do not use in production.`,
+    lbl_rel_order_heading: "── Order conditions ──",
+    lbl_rel_equiv_heading: "── Equivalence conditions ──",
+    lbl_rel_total: "Total order?",
+    lbl_rel_classes: "Equivalence classes:",
+    lbl_rel_examples: "Examples:",
+    proof_label: "Proof",
+    total_yes: "✓ Yes",
+    total_no: "✗ No",
+    btn_verify_modulo: "Verify a ≡ b (mod n)",
+    btn_test_prime: "Test primality",
+    btn_execute: "Execute",
+  }
+};
+
+// ─── LANG STATE ──────────────────────────────────────────────
+let LANG = localStorage.getItem('lang') || 'fr';
+
+function t(k) { return TR[LANG][k] ?? k; }
+
+function applyLang() {
+  const T = TR[LANG];
+  // spans with data-key
+  document.querySelectorAll('.t[data-key]').forEach(el => {
+    const v = T[el.dataset.key];
+    if (v !== undefined) el.textContent = v;
+  });
+  // inputs placeholders
+  document.querySelectorAll('input[data-ph]').forEach(el => {
+    const v = T[el.dataset.ph];
+    if (v !== undefined) el.placeholder = v;
+  });
+  // theory boxes
+  ['ops','comp','appli','sets',
+   'rel_order','rel_equiv','rel_modulo',
+   'prime_single','prime_range',
+   'crypto_b64','crypto_caesar','crypto_rsa'].forEach(id => {
+    const el = document.getElementById('theory-' + id);
+    if (el && T['theory_' + id]) el.textContent = T['theory_' + id];
+  });
+  // app title
+  document.getElementById('app-title-el').innerHTML =
+    T.app_title + ' <span>' + T.app_sub + '</span>';
+  // result boxes default
+  document.querySelectorAll('.result-box').forEach(rb => {
+    if (!rb.innerHTML.trim() || rb.dataset.default === '1') {
+      rb.textContent = T.result_ph;
+      rb.dataset.default = '1';
+      rb.className = 'result-box';
+    }
+  });
+  // lang buttons
+  document.getElementById('lang-fr').classList.toggle('active', LANG === 'fr');
+  document.getElementById('lang-en').classList.toggle('active', LANG === 'en');
+  document.documentElement.lang = LANG;
+}
+
+function setLang(lang) {
+  LANG = lang;
+  localStorage.setItem('lang', lang);
+  applyLang();
+}
+
+// ─── THEME ───────────────────────────────────────────────────
+(function initTheme() {
+  const saved = localStorage.getItem('theme');
+  const sys   = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const theme = saved || sys;
+  document.documentElement.setAttribute('data-theme', theme);
+  document.getElementById('theme-icon').textContent = theme === 'dark' ? '☀️' : '🌙';
+})();
+
+function toggleTheme() {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.getElementById('theme-icon').textContent = next === 'dark' ? '☀️' : '🌙';
+}
+
+// ─── TABS ────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('pane-' + name).classList.add('active');
+  document.querySelector(`.tab-btn[data-tab="${name}"]`).classList.add('active');
+  if (name === 'hist') loadHistory();
+  if (name === 'sets') loadSets();
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────
+let _tt;
+function toast(msg, type='') {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = 'show ' + type;
+  clearTimeout(_tt); _tt = setTimeout(() => el.className = '', 2600);
+}
+async function api(url, body=null) {
+  const opts = { method: body ? 'POST' : 'GET', headers:{'Content-Type':'application/json'} };
+  if (body) opts.body = JSON.stringify({ ...body, lang: LANG });
+  return (await fetch(url, opts)).json();
+}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function setResult(id, html, cls='') {
+  const el = document.getElementById(id);
+  el.innerHTML = html; el.className = 'result-box ' + cls;
+  delete el.dataset.default;
+}
+function showErr(id, msg) {
+  setResult(id, '⚠️  ' + esc(msg), 'error');
+  toast(t('toast_err'), 'err');
+}
+
+// ─── TAB 1 ───────────────────────────────────────────────────
+const OP_LABELS = {
+  union:'A ∪ B', intersection:'A ∩ B', difference:'A \\ B',
+  symdiff:'A △ B', product:'A × B', cardinality:'|A|'
+};
+async function doOp(op) {
+  // mark the clicked button active
+  document.querySelectorAll('.op-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  const A = document.getElementById('ops-A').value;
+  const B = document.getElementById('ops-B').value;
+  const d = await api('/api/ops', {op, A, B});
+  if (d.error) { showErr('ops-result', d.error); return; }
+  let html = `<span class="acc">A</span> = { ${d.A.join(', ')} }\n`;
+  if (d.B !== null) html += `<span class="acc">B</span> = { ${d.B.join(', ')} }\n`;
+  html += '\n';
+  html += `<span class="hi">${OP_LABELS[op]}</span>  =  `;
+  if (op === 'product' && Array.isArray(d.result) && Array.isArray(d.result[0]))
+    html += `<span class="ok-val">{ ${d.result.map(p=>`(${p[0]}, ${p[1]})`).join(', ')} }</span>`;
+  else if (op === 'cardinality')
+    html += `<span class="ok-val">${d.result}</span>`;
+  else
+    html += `<span class="ok-val">{ ${d.result.join(', ')} }</span>`;
+  setResult('ops-result', html, 'ok');
+  toast(t('toast_ok'), 'ok');
+}
+
+// ─── TAB 2 ───────────────────────────────────────────────────
+async function doComp() {
+  const start = document.getElementById('comp-start').value;
+  const end   = document.getElementById('comp-end').value;
+  const pred  = document.getElementById('comp-pred').value;
+  const d = await api('/api/comprehension', {start:+start, end:+end, predicate:pred});
+  if (d.error) { showErr('comp-result', d.error); return; }
+  const html =
+    `<span class="acc">E</span> = { ${d.start}, …, ${d.end} }   |E| = ${d.universe_size}\n` +
+    `<span class="acc">P(x)</span> = « ${esc(d.predicate)} »\n\n` +
+    `<span class="hi">A</span> = <span class="ok-val">{ ${d.result.join(', ')} }</span>\n` +
+    `|A| = <span class="ok-val">${d.cardinality}</span>`;
+  setResult('comp-result', html, 'ok');
+  toast(t('toast_built'), 'ok');
+}
+
+// ─── TAB 3 ───────────────────────────────────────────────────
+async function doFunction() {
+  const d = await api('/api/function', {
+    A: document.getElementById('f-A').value,
+    B: document.getElementById('f-B').value,
+    formula: document.getElementById('f-formula').value,
+    S: document.getElementById('f-S').value,
+    T: document.getElementById('f-T').value,
+  });
+  if (d.error) { showErr('f-result', d.error); return; }
+  const fVals = d.f_table.map(r => `f(${r.x})=${r.fx}`).join('  ');
+  const html =
+    `<span class="acc">f(x)</span> = ${esc(d.formula)}\n` +
+    `<span style="color:var(--muted);font-size:0.78em">${esc(fVals)}</span>\n\n` +
+    `Image directe   f({ ${d.S.join(', ')} }) = <span class="ok-val">{ ${d.image_directe.join(', ')} }</span>\n` +
+    `Image inverse   f⁻¹({ ${d.T.join(', ')} }) = <span class="ok-val">{ ${d.image_inverse.join(', ')} }</span>\n\n` +
+    `${esc(d.injective)}\n${esc(d.surjective)}\n${esc(d.bijective)}`;
+  setResult('f-result', html, 'ok');
+  toast(t('toast_done'), 'ok');
+}
+
+// ─── TAB 4 ───────────────────────────────────────────────────
+async function loadSets() {
+  const sets = await api('/api/sets');
+  const tbody = document.getElementById('sets-tbody');
+  if (!sets.length) {
+    tbody.innerHTML = `<tr class="empty"><td colspan="3">${t('empty_sets')}</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = sets.map(s =>
+    `<tr onclick="document.getElementById('sets-name').value='${esc(s.name)}'">
+      <td>${esc(s.name)}</td><td>[ ${s.elements.join(', ')} ]</td><td>${s.cardinality}</td>
+    </tr>`
+  ).join('');
+}
+
+async function setsAction(action) {
+  const name  = document.getElementById('sets-name').value.trim();
+  const msgEl = document.getElementById('sets-msg');
+  const setMsg = (txt, color) => { msgEl.textContent = txt; msgEl.style.color = color; };
+
+  if (action === 'save') {
+    const elements = document.getElementById('sets-elements').value.trim();
+    const d = await api('/api/sets/save', {name, elements});
+    if (d.error) { setMsg('⚠️  ' + d.error, 'var(--danger)'); return; }
+    setMsg(`✅  « ${d.name} » = [ ${d.elements.join(', ')} ]  ${t('toast_saved')}`, 'var(--success)');
+    toast(`'${name}' ${t('toast_saved')}`, 'ok'); loadSets();
+
+  } else if (action === 'loadA' || action === 'loadB') {
+    const d = await api('/api/sets/load', {name});
+    if (d.error) { setMsg('⚠️  ' + d.error, 'var(--danger)'); return; }
+    const targetId = action === 'loadA' ? 'ops-A' : 'ops-B';
+    const label    = action === 'loadA' ? 'A' : 'B';
+    document.getElementById(targetId).value = d.elements.join(' ');
+    setMsg(`✅  « ${name} » → ${label}`, 'var(--success)');
+    toast(`'${name}' → ${label} ✅`, 'ok');
+    switchTab('ops');
+
+  } else if (action === 'delete') {
+    if (!name) { setMsg('⚠️  ' + (LANG === 'fr' ? "Entre le nom de l'ensemble à supprimer." : 'Enter the set name to delete.'), 'var(--danger)'); return; }
+    await api('/api/sets/delete', {name});
+    setMsg(`🗑  « ${name} » ${t('toast_del')}`, 'var(--muted)');
+    toast(`'${name}' ${t('toast_del')}`, ''); loadSets();
+  }
+}
+
+// ─── TAB 5 ───────────────────────────────────────────────────
+async function loadHistory() {
+  const hist  = await api('/api/history');
+  const tbody = document.getElementById('hist-tbody');
+  if (!hist.length) {
+    tbody.innerHTML = `<tr class="empty"><td colspan="5">${t('empty_hist')}</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = hist.map(e => {
+    const res = Array.isArray(e.result)
+      ? (Array.isArray(e.result[0])
+          ? '{ ' + e.result.map(p=>`(${p})`).join(', ') + ' }'
+          : '{ ' + e.result.join(', ') + ' }')
+      : String(e.result);
+    const b = e.operands.B !== null ? '{ ' + (e.operands.B||[]).join(', ') + ' }' : '—';
+    return `<tr>
+      <td>${esc(e.timestamp)}</td><td>${esc(e.operation)}</td>
+      <td>{ ${(e.operands.A||[]).join(', ')} }</td>
+      <td>${b}</td><td>${esc(res)}</td>
+    </tr>`;
+  }).join('');
+}
+
+async function clearHistory() {
+  await api('/api/history/clear', {});
+  loadHistory();
+  toast(t('toast_cleared'), '');
+}
+
+// ─── BOOT ────────────────────────────────────────────────────
+applyLang();
+loadSets();
+
+// ─── EXTEND TRANSLATIONS ─────────────────────────────────────
+const TR_EXT = {
+  fr: { tab_rel:'Relations', tab_prime:'Nombres Premiers', tab_crypto:'Cryptographie' },
+  en: { tab_rel:'Relations', tab_prime:'Prime Numbers',    tab_crypto:'Cryptography' }
+};
+['fr','en'].forEach(l => Object.assign(TR[l], TR_EXT[l]));
+
+// ─── PATCH switchTab ─────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const pane = document.getElementById('pane-' + name);
+  if (!pane) return;
+  pane.classList.add('active');
+  document.querySelector(`.tab-btn[data-tab="${name}"]`).classList.add('active');
+  if (name === 'hist')  loadHistory();
+  if (name === 'sets')  loadSets();
+  if (name === 'rel')   initRelations();
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────
+function showNewResult(id, lines, isError=false) {
+  const el = document.getElementById(id);
+  el.innerHTML = lines.map(l => esc(String(l))).join('\n');
+  el.className = 'result-box ' + (isError ? 'error' : 'ok');
+}
+
+// ─── TAB 6 : RELATIONS ───────────────────────────────────────
+let _relData = {order: null, equiv: null};
+let _relSubCurrent = 'order';
+
+async function initRelations() {
+  if (!_relData.order) {
+    _relData.order = await api('/api/relations/order', {});
+    _relData.equiv = await api('/api/relations/equivalence', {});
+    buildRelButtons('order', _relData.order, 'order-rel-buttons');
+    buildRelButtons('equiv', _relData.equiv, 'equiv-rel-buttons');
+  }
+}
+
+function buildRelButtons(type, data, containerId) {
+  const cont = document.getElementById(containerId);
+  const fn = type === 'order' ? 'orderClick' : 'equivClick';
+  cont.innerHTML = Object.entries(data).map(([k, v]) =>
+    `<button class="btn" onclick="${fn}('${k}')">${v.symbol}  ${v.name.split('(')[0].trim()}</button>`
+  ).join('');
+}
+function orderClick(k) { showRelResult('order', k, 'order-rel-result'); }
+function equivClick(k) { showRelResult('equiv', k, 'equiv-rel-result'); }
+
+function showRelResult(type, key, resultId) {
+  const rel = _relData[type][key];
+  if (!rel) return;
+  const lines = [`=== ${rel.name} ===`, `Symbole  : ${rel.symbol}`, `Domaine  : ${rel.domain}`, ''];
+  const heading = type === 'order' ? t('lbl_rel_order_heading') : t('lbl_rel_equiv_heading');
+  lines.push(heading);
+  for (const cond of Object.values(rel.conditions)) {
+    lines.push(`  [${cond.label}]`, `  ${cond.statement}`, `  ${t('proof_label')} : ${cond.proof}`, '');
+  }
+  if (type === 'order') {
+    lines.push(`${t('lbl_rel_total')} ${rel.is_total ? t('total_yes') : t('total_no')} — ${rel.total_note}`);
+  } else {
+    lines.push(`${t('lbl_rel_classes')} ${rel.classes}`);
+  }
+  lines.push(`${t('lbl_rel_examples')} ${rel.examples.join(', ')}`);
+  showNewResult(resultId, lines);
+}
+
+function relSubTab(sub) {
+  ['order','equiv','modulo'].forEach(s => {
+    document.getElementById('rel-pane-' + s).style.display = s === sub ? '' : 'none';
+    document.getElementById('rel-sub-' + s).classList.toggle('active', s === sub);
+  });
+}
+
+async function doModulo() {
+  const a = document.getElementById('mod-a').value;
+  const b = document.getElementById('mod-b').value;
+  const n = document.getElementById('mod-n').value;
+  const d = await api('/api/relations/modulo', {a: +a, b: +b, n: +n});
+  if (d.error) { showNewResult('mod-result', ['⚠️  ' + d.error], true); return; }
+  showNewResult('mod-result', d.explanation.split('\n'));
+}
+
+// ─── TAB 7 : PRIME ───────────────────────────────────────────
+function primeSubTab(sub) {
+  ['single','range'].forEach(s => {
+    document.getElementById('prime-pane-' + s).style.display = s === sub ? '' : 'none';
+    document.getElementById('prime-sub-' + s).classList.toggle('active', s === sub);
+  });
+}
+
+async function doPrimeCheck() {
+  const n = document.getElementById('prime-single-n').value.trim();
+  if (!n) return;
+  const d = await api('/api/prime/check', {n: +n});
+  if (d.error) { showNewResult('prime-single-result', ['⚠️  ' + d.error], true); return; }
+  const lines = [...(d.steps || []), '', d.verdict];
+  if (d.factors && d.factors.length) {
+    const factStr = d.factors.map(f => f.exp > 1 ? `${f.prime}^${f.exp}` : `${f.prime}`).join(' × ');
+    lines.push(`Factorisation : ${n} = ${factStr}`);
+  }
+  showNewResult('prime-single-result', lines);
+  toast(d.is_prime ? '✓ Premier' : '✗ Composé', d.is_prime ? 'ok' : '');
+}
+
+async function doPrimeRange(verbose) {
+  const a = document.getElementById('prime-range-a').value.trim();
+  const b = document.getElementById('prime-range-b').value.trim();
+  if (!a || !b) return;
+  const d = await api('/api/prime/range', {a: +a, b: +b, verbose});
+  if (d.error) { showNewResult('prime-range-result', ['⚠️  ' + d.error], true); return; }
+  const lines = [
+    `Intervalle : [${d.range[0]}, ${d.range[1]}]`,
+    `Nombres premiers trouvés : ${d.count}`,
+    '',
+    `Premiers : ${d.primes.length ? d.primes.join(', ') : 'aucun'}`,
+    '',
+    `Composés (${d.composites.length}) : ${d.composites.slice(0,30).join(', ')}${d.composites.length > 30 ? ' …' : ''}`,
+  ];
+  showNewResult('prime-range-result', lines);
+  toast(`${d.count} premier(s) trouvé(s)`, 'ok');
+}
+
+// ─── TAB 8 : CRYPTOGRAPHY ────────────────────────────────────
+let _b64Mode = 'encode';
+let _caesarMode = 'encode';
+let _rsaMode = 'gen';
+
+function cryptoSubTab(sub) {
+  ['b64','caesar','rsa'].forEach(s => {
+    document.getElementById('crypto-pane-' + s).style.display = s === sub ? '' : 'none';
+    document.getElementById('crypto-sub-' + s).classList.toggle('active', s === sub);
+  });
+}
+
+function setB64Mode(mode) {
+  _b64Mode = mode;
+  document.getElementById('b64-mode-enc').classList.toggle('active', mode === 'encode');
+  document.getElementById('b64-mode-dec').classList.toggle('active', mode === 'decode');
+  document.getElementById('b64-label').textContent = mode === 'encode' ? 'Texte à encoder' : 'Base64 à décoder';
+}
+
+async function doBase64() {
+  const text = document.getElementById('b64-input').value;
+  if (!text) return;
+  const d = await api('/api/crypto/base64', {mode: _b64Mode, text});
+  if (d.error) { showNewResult('b64-result', ['⚠️  ' + d.error], true); return; }
+  const main = _b64Mode === 'encode' ? `► Encodé : ${d.encoded}` : `► Décodé : ${d.decoded}`;
+  showNewResult('b64-result', [...(d.steps || []), '', main]);
+}
+
+function setCaesarMode(mode) {
+  _caesarMode = mode;
+  ['enc','dec','brute'].forEach(m =>
+    document.getElementById('caesar-mode-' + m).classList.toggle('active', m === mode));
+  document.getElementById('caesar-shift-field').style.display = mode === 'brute' ? 'none' : '';
+}
+
+async function doCaesar() {
+  const text = document.getElementById('caesar-input').value;
+  const shift = document.getElementById('caesar-shift').value || 3;
+  if (!text) return;
+  const brute = _caesarMode === 'brute';
+  const d = await api('/api/crypto/caesar', {mode: brute ? 'encode' : _caesarMode, text, shift: +shift, brute_force: brute});
+  if (d.error) { showNewResult('caesar-result', ['⚠️  ' + d.error], true); return; }
+  if (brute) {
+    const lines = ['── Brute-force : 25 décalages ──', ''];
+    for (const r of d.results) lines.push(`  shift=${String(r.shift).padStart(2,' ')} → ${r.decoded}`);
+    showNewResult('caesar-result', lines);
+  } else {
+    showNewResult('caesar-result', d.steps || []);
+  }
+}
+
+function setRsaMode(mode) {
+  _rsaMode = mode;
+  ['gen','enc','dec'].forEach(m => {
+    document.getElementById('rsa-mode-' + m).classList.toggle('active', m === mode);
+    document.getElementById('rsa-pane-' + m).style.display = m === mode ? '' : 'none';
+  });
+}
+
+async function doRsaGenerate() {
+  const bits = document.getElementById('rsa-bits').value || 64;
+  const d = await api('/api/crypto/rsa/generate', {bits: +bits});
+  if (d.error) { showNewResult('rsa-gen-result', ['⚠️  ' + d.error], true); return; }
+  const lines = [...(d.steps || []), '', '── Résumé ──',
+    `  p = ${d.p}`, `  q = ${d.q}`, `  n = ${d.n}`,
+    `  e = ${d.e}  (clé publique)`, `  d = ${d.d}  (clé privée)`];
+  document.getElementById('rsa-enc-p').value = d.p;
+  document.getElementById('rsa-enc-q').value = d.q;
+  document.getElementById('rsa-enc-e').value = d.e;
+  document.getElementById('rsa-enc-n').value = d.n;
+  document.getElementById('rsa-dec-d').value = d.d;
+  document.getElementById('rsa-dec-n').value = d.n;
+  showNewResult('rsa-gen-result', lines);
+  toast('Clés RSA générées ✓', 'ok');
+}
+
+async function doRsaEncrypt() {
+  const message = document.getElementById('rsa-enc-msg').value;
+  const p = document.getElementById('rsa-enc-p').value;
+  const q = document.getElementById('rsa-enc-q').value;
+  const e = document.getElementById('rsa-enc-e').value;
+  const n = document.getElementById('rsa-enc-n').value;
+  if (!message) return;
+  const d = await api('/api/crypto/rsa/encrypt', {message, p, q, e, n});
+  if (d.error) { showNewResult('rsa-enc-result', ['⚠️  ' + d.error], true); return; }
+  const lines = [...(d.steps || []), '',
+    `► Chiffré (décimal) : ${d.ciphertext}`,
+    `► Chiffré (hex)     : ${d.ciphertext_hex}`,
+    '', 'Auto-rempli dans Déchiffrer ✓'];
+  document.getElementById('rsa-dec-c').value = d.ciphertext;
+  if (d.d) document.getElementById('rsa-dec-d').value = d.d;
+  if (d.n) document.getElementById('rsa-dec-n').value = d.n;
+  showNewResult('rsa-enc-result', lines);
+}
+
+async function doRsaDecrypt() {
+  const c  = document.getElementById('rsa-dec-c').value;
+  const dv = document.getElementById('rsa-dec-d').value;
+  const n  = document.getElementById('rsa-dec-n').value;
+  if (!c || !dv || !n) return;
+  const d = await api('/api/crypto/rsa/decrypt', {ciphertext: c, d: dv, n});
+  if (d.error) { showNewResult('rsa-dec-result', ['⚠️  ' + d.error], true); return; }
+  const lines = [...(d.steps || []), '',
+    d.plaintext !== null ? `► Message déchiffré : ${d.plaintext}` : `► Entier déchiffré : ${d.plaintext_int}`];
+  showNewResult('rsa-dec-result', lines);
+}
+</script>
+</body>
+</html>

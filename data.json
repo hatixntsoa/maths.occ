@@ -1,0 +1,931 @@
+{
+    "hand": [
+        {
+            "number": 2,
+            "color": "green",
+            "shape": "diamond",
+            "shading": "solid"
+        },
+        {
+            "number": 1,
+            "color": "green",
+            "shape": "squiggle",
+            "shading": "open"
+        },
+        {
+            "number": 2,
+            "color": "purple",
+            "shape": "oval",
+            "shading": "open"
+        },
+        {
+            "number": 1,
+            "color": "red",
+            "shape": "squiggle",
+            "shading": "solid"
+        },
+        {
+            "number": 3,
+            "color": "purple",
+            "shape": "diamond",
+            "shading": "open"
+        },
+        {
+            "number": 3,
+            "color": "red",
+            "shape": "squiggle",
+            "shading": "striped"
+        },
+        {
+            "number": 3,
+            "color": "red",
+            "shape": "diamond",
+            "shading": "striped"
+        },
+        {
+            "number": 3,
+            "color": "green",
+            "shape": "diamond",
+            "shading": "striped"
+        },
+        {
+            "number": 2,
+            "color": "purple",
+            "shape": "diamond",
+            "shading": "solid"
+        },
+        {
+            "number": 1,
+            "color": "purple",
+            "shape": "diamond",
+            "shading": "open"
+        },
+        {
+            "number": 1,
+            "color": "green",
+            "shape": "diamond",
+            "shading": "solid"
+        },
+        {
+            "number": 1,
+            "color": "red",
+            "shape": "squiggle",
+            "shading": "open"
+        },
+        {
+            "number": 1,
+            "color": "red",
+            "shape": "oval",
+            "shading": "open"
+        },
+        {
+            "number": 2,
+            "color": "green",
+            "shape": "squiggle",
+            "shading": "solid"
+        },
+        {
+            "number": 3,
+            "color": "purple",
+            "shape": "oval",
+            "shading": "striped"
+        },
+        {
+            "number": 2,
+            "color": "purple",
+            "shape": "oval",
+            "shading": "solid"
+        },
+        {
+            "number": 3,
+            "color": "purple",
+            "shape": "oval",
+            "shading": "solid"
+        },
+        {
+            "number": 2,
+            "color": "purple",
+            "shape": "oval",
+            "shading": "striped"
+        }
+    ],
+    "deck": [
+        {
+            "number": 2,
+            "color": "red",
+            "shape": "squiggle",
+            "shading": "open"
+        },
+        {
+            "number": 3,
+            "color": "purple",
+            "shape": "squiggle",
+            "shading": "striped"
+        },
+        {
+            "number": 1,
+            "color": "purple",
+            "shape": "squiggle",
+            "shading": "open"
+        },
+        {
+            "number": 3,
+            "color": "red",
+            "shape": "diamond",
+            "shading": "open"
+        },
+        {
+            "number": 2,
+            "color": "green",
+            "shape": "squiggle",
+            "shading": "open"
+        },
+        {
+            "number": 2,
+            "color": "purple",
+            "shape": "diamond",
+            "shading": "open"
+        },
+        {
+            "number": 1,
+            "color": "red",
+            "shape": "diamond",
+            "shading": "open"
+        },
+        {
+            "number": 3,
+            "color": "red",
+            "shape": "diamond",
+            "shading": "solid"
+        },
+        {
+            "number": 1,
+            "color": "green",
+            "shape": "oval",
+            "shading": "open"
+        },
+        {
+            "number": 1,
+            "color": "green",
+            "shape": "squiggle",
+            "shading": "solid"
+        },
+        {
+            "number": 2,
+            "color": "green",
+            "shape": "diamond",
+            "shading": "striped"
+        },
+        {
+            "number": 1,
+            "color": "purple",
+            "shape": "oval",
+            "shading": "open"
+        },
+        {
+            "number": 2,
+            "color": "purple",
+            "shape": "squiggle",
+            "shading": "open"
+        },
+        {
+            "number": 1,
+            "color": "red",
+            "shape": "oval",
+            "shading": "solid"
+        },
+        {
+            "number": 2,
+            "color": "purple",
+            "shape": "diamond",
+            "shading": "striped"
+        },
+        {
+            "number": 2,
+            "color": "green",
+            "shape": "diamond",
+            "shading": "open"
+        },
+        {
+            "number": 1,
+            "color": "green",
+            "shape": "diamond",
+            "shading": "open"
+        },
+        {
+            "number": 1,
+            "color": "purple",
+            "shape": "oval",
+            "shading": "striped"
+        },
+        {
+            "number": 2,
+            "color": "red",
+            "shape": "squiggle",
+            "shading": "striped"
+        },
+        {
+            "number": 2,
+            "color": "red",
+            "shape": "diamond",
+            "shading": "striped"
+        },
+        {
+            "number": 2,
+            "color": "red",
+            "shape": "oval",
+            "shading": "open"
+        },
+        {
+            "number": 3,
+            "color": "green",
+            "shape": "oval",
+            "shading": "striped"
+        },
+        {
+            "number": 1,
+            "color": "red",
+            "shape": "diamond",
+            "shading": "solid"
+        },
+        {
+            "number": 1,
+            "color": "red",
+            "shape": "oval",
+            "shading": "striped"
+        },
+        {
+            "number": 2,
+            "color": "purple",
+            "shape": "squiggle",
+            "shading": "solid"
+        },
+        {
+            "number": 3,
+            "color": "red",
+            "shape": "oval",
+            "shading": "solid"
+        },
+        {
+            "number": 1,
+            "color": "purple",
+            "shape": "diamond",
+            "shading": "solid"
+        },
+        {
+            "number": 3,
+            "color": "green",
+            "shape": "diamond",
+            "shading": "open"
+        },
+        {
+            "number": 1,
+            "color": "purple",
+            "shape": "diamond",
+            "shading": "striped"
+        },
+        {
+            "number": 3,
+            "color": "red",
+            "shape": "squiggle",
+            "shading": "open"
+        },
+        {
+            "number": 3,
+            "color": "purple",
+            "shape": "diamond",
+            "shading": "solid"
+        },
+        {
+            "number": 2,
+            "color": "green",
+            "shape": "squiggle",
+            "shading": "striped"
+        },
+        {
+            "number": 1,
+            "color": "purple",
+            "shape": "oval",
+            "shading": "solid"
+        },
+        {
+            "number": 3,
+            "color": "purple",
+            "shape": "squiggle",
+            "shading": "solid"
+        },
+        {
+            "number": 1,
+            "color": "red",
+            "shape": "diamond",
+            "shading": "striped"
+        },
+        {
+            "number": 1,
+            "color": "green",
+            "shape": "diamond",
+            "shading": "striped"
+        },
+        {
+            "number": 2,
+            "color": "red",
+            "shape": "squiggle",
+            "shading": "solid"
+        },
+        {
+            "number": 3,
+            "color": "green",
+            "shape": "squiggle",
+            "shading": "striped"
+        },
+        {
+            "number": 3,
+            "color": "green",
+            "shape": "diamond",
+            "shading": "solid"
+        },
+        {
+            "number": 2,
+            "color": "red",
+            "shape": "oval",
+            "shading": "striped"
+        },
+        {
+            "number": 3,
+            "color": "red",
+            "shape": "squiggle",
+            "shading": "solid"
+        },
+        {
+            "number": 3,
+            "color": "purple",
+            "shape": "squiggle",
+            "shading": "open"
+        },
+        {
+            "number": 1,
+            "color": "red",
+            "shape": "squiggle",
+            "shading": "striped"
+        },
+        {
+            "number": 3,
+            "color": "green",
+            "shape": "oval",
+            "shading": "solid"
+        },
+        {
+            "number": 2,
+            "color": "green",
+            "shape": "oval",
+            "shading": "solid"
+        },
+        {
+            "number": 1,
+            "color": "green",
+            "shape": "oval",
+            "shading": "solid"
+        },
+        {
+            "number": 1,
+            "color": "purple",
+            "shape": "squiggle",
+            "shading": "solid"
+        },
+        {
+            "number": 1,
+            "color": "green",
+            "shape": "oval",
+            "shading": "striped"
+        },
+        {
+            "number": 3,
+            "color": "red",
+            "shape": "oval",
+            "shading": "open"
+        },
+        {
+            "number": 3,
+            "color": "red",
+            "shape": "oval",
+            "shading": "striped"
+        },
+        {
+            "number": 1,
+            "color": "green",
+            "shape": "squiggle",
+            "shading": "striped"
+        },
+        {
+            "number": 3,
+            "color": "purple",
+            "shape": "oval",
+            "shading": "open"
+        },
+        {
+            "number": 3,
+            "color": "green",
+            "shape": "oval",
+            "shading": "open"
+        },
+        {
+            "number": 1,
+            "color": "purple",
+            "shape": "squiggle",
+            "shading": "striped"
+        },
+        {
+            "number": 3,
+            "color": "purple",
+            "shape": "diamond",
+            "shading": "striped"
+        },
+        {
+            "number": 3,
+            "color": "green",
+            "shape": "squiggle",
+            "shading": "solid"
+        },
+        {
+            "number": 2,
+            "color": "red",
+            "shape": "diamond",
+            "shading": "solid"
+        },
+        {
+            "number": 2,
+            "color": "red",
+            "shape": "oval",
+            "shading": "solid"
+        },
+        {
+            "number": 3,
+            "color": "green",
+            "shape": "squiggle",
+            "shading": "open"
+        },
+        {
+            "number": 2,
+            "color": "red",
+            "shape": "diamond",
+            "shading": "open"
+        },
+        {
+            "number": 2,
+            "color": "green",
+            "shape": "oval",
+            "shading": "open"
+        },
+        {
+            "number": 2,
+            "color": "purple",
+            "shape": "squiggle",
+            "shading": "striped"
+        },
+        {
+            "number": 2,
+            "color": "green",
+            "shape": "oval",
+            "shading": "striped"
+        }
+    ],
+    "score": 0,
+    "history": [
+        {
+            "timestamp": "2026-04-01 06:31:09",
+            "operation": "union",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    "1",
+                    "2",
+                    "a",
+                    "d",
+                    "e",
+                    "n",
+                    "r",
+                    "t",
+                    "v"
+                ]
+            },
+            "result": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "9",
+                "a",
+                "d",
+                "e",
+                "n",
+                "q",
+                "r",
+                "t",
+                "v",
+                "w"
+            ]
+        },
+        {
+            "timestamp": "2026-04-01 06:38:16",
+            "operation": "union",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    "3",
+                    "4",
+                    "e",
+                    "r",
+                    "t"
+                ]
+            },
+            "result": [
+                "3",
+                "4",
+                "9",
+                "e",
+                "q",
+                "r",
+                "t",
+                "w"
+            ]
+        },
+        {
+            "timestamp": "2026-04-01 06:38:16",
+            "operation": "intersection",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    "3",
+                    "4",
+                    "e",
+                    "r",
+                    "t"
+                ]
+            },
+            "result": [
+                "3",
+                "4",
+                "e",
+                "r"
+            ]
+        },
+        {
+            "timestamp": "2026-04-01 06:38:17",
+            "operation": "difference",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    "3",
+                    "4",
+                    "e",
+                    "r",
+                    "t"
+                ]
+            },
+            "result": [
+                "9",
+                "q",
+                "w"
+            ]
+        },
+        {
+            "timestamp": "2026-04-01 06:38:18",
+            "operation": "union",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    "3",
+                    "4",
+                    "e",
+                    "r",
+                    "t"
+                ]
+            },
+            "result": [
+                "3",
+                "4",
+                "9",
+                "e",
+                "q",
+                "r",
+                "t",
+                "w"
+            ]
+        },
+        {
+            "timestamp": "2026-04-01 06:38:25",
+            "operation": "intersection",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    3,
+                    4
+                ]
+            },
+            "result": []
+        },
+        {
+            "timestamp": "2026-04-01 06:38:27",
+            "operation": "difference",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    3,
+                    4
+                ]
+            },
+            "result": [
+                "3",
+                "4",
+                "9",
+                "e",
+                "q",
+                "r",
+                "w"
+            ]
+        },
+        {
+            "timestamp": "2026-04-01 06:38:28",
+            "operation": "product",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    3,
+                    4
+                ]
+            },
+            "result": [
+                [
+                    "3",
+                    3
+                ],
+                [
+                    "3",
+                    4
+                ],
+                [
+                    "4",
+                    3
+                ],
+                [
+                    "4",
+                    4
+                ],
+                [
+                    "9",
+                    3
+                ],
+                [
+                    "9",
+                    4
+                ],
+                [
+                    "e",
+                    3
+                ],
+                [
+                    "e",
+                    4
+                ],
+                [
+                    "q",
+                    3
+                ],
+                [
+                    "q",
+                    4
+                ],
+                [
+                    "r",
+                    3
+                ],
+                [
+                    "r",
+                    4
+                ],
+                [
+                    "w",
+                    3
+                ],
+                [
+                    "w",
+                    4
+                ]
+            ]
+        },
+        {
+            "timestamp": "2026-04-01 06:38:41",
+            "operation": "difference",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    3,
+                    4,
+                    5
+                ]
+            },
+            "result": [
+                "3",
+                "4",
+                "9",
+                "e",
+                "q",
+                "r",
+                "w"
+            ]
+        },
+        {
+            "timestamp": "2026-04-01 06:38:42",
+            "operation": "intersection",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    3,
+                    4,
+                    5
+                ]
+            },
+            "result": []
+        },
+        {
+            "timestamp": "2026-04-01 06:38:43",
+            "operation": "intersection",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    3,
+                    4,
+                    5
+                ]
+            },
+            "result": []
+        },
+        {
+            "timestamp": "2026-04-01 06:38:44",
+            "operation": "difference",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    3,
+                    4,
+                    5
+                ]
+            },
+            "result": [
+                "3",
+                "4",
+                "9",
+                "e",
+                "q",
+                "r",
+                "w"
+            ]
+        },
+        {
+            "timestamp": "2026-04-01 06:38:48",
+            "operation": "intersection",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    3,
+                    4,
+                    5
+                ]
+            },
+            "result": []
+        },
+        {
+            "timestamp": "2026-04-01 06:39:02",
+            "operation": "difference",
+            "operands": {
+                "A": [
+                    "3",
+                    "4",
+                    "9",
+                    "e",
+                    "q",
+                    "r",
+                    "w"
+                ],
+                "B": [
+                    3,
+                    4
+                ]
+            },
+            "result": [
+                "3",
+                "4",
+                "9",
+                "e",
+                "q",
+                "r",
+                "w"
+            ]
+        }
+    ],
+    "sets": {}
+}
